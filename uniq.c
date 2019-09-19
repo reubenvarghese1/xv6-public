@@ -38,13 +38,8 @@ void
 load(void)
 {
     int fd;
-    struct test t;
-
 
     char buf[20];
-    size_t nbytes;
-    ssize_t bytes_read;
-    nbytes = sizeof(buf);
 
 
     fd = open("testing.txt", O_RDONLY);
@@ -57,7 +52,7 @@ load(void)
 
     int n;
 
-    while((n = read(fd, buf, nbytes)) > 0)
+    while((n = read(fd, buf, sizeof(buf))) > 0)
         write(1, buf, n);
     if(n < 0){
         printf(1, "Uniq: read error\n");
