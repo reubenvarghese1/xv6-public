@@ -40,7 +40,14 @@ load(void)
     int fd;
     struct test t;
 
-    fd = open("backup", O_RDONLY);
+
+    char buf[20];
+    size_t nbytes;
+    ssize_t bytes_read;
+    nbytes = sizeof(buf);
+
+
+    fd = open("testing.txt", O_RDONLY);
     if(fd >= 0) {
         printf(1, "ok: read backup file succeed\n");
     } else {
@@ -48,12 +55,15 @@ load(void)
         exit();
     }
 
-    int size = sizeof(t);
-    if(read(fd, &t, size) != size){
-        printf(1, "error: read from backup file failed\n");
+    int n;
+
+    while((n = read(fd, buf, nbytes)) > 0)
+        write(1, buf, n);
+    if(n < 0){
+        printf(1, "Uniq: read error\n");
         exit();
     }
-    printf(1, "file contents name %c and number %d", t.name, t.number);
+
     printf(1, "read ok\n");
     close(fd);
 }
