@@ -35,21 +35,11 @@ save(void)
 }
 
 void
-load(void)
+load(int fd)
 {
-    int fd;
+
 
     char buf[20];
-
-
-    fd = open("testing.txt", O_RDONLY);
-    if(fd >= 0) {
-        printf(1, "ok: read backup file succeed\n");
-    } else {
-        printf(1, "error: read backup file failed\n");
-        exit();
-    }
-
     int n;
 
     while((n = read(fd, buf, sizeof(buf))) > 0)
@@ -60,14 +50,26 @@ load(void)
     }
 
     printf(1, "read ok\n");
-    close(fd);
 }
 
 int
-main(void)
+main(int argc, char *argv[])
 {
+    int fd,i;
     save();
-    load();
+    if(argc <= 1){
+        load(0);
+        exit();
+    }
+
+    for(i = 1; i < argc; i++){
+        if((fd = open(argv[i], O_RDONLY)) < 0){
+            printf(1, "Uniq: cannot open %s\n", argv[i]);
+            exit();
+        }
+        load(fd);
+        close(fd);
+    }
 
     exit();
 }
