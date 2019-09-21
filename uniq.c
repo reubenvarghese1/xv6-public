@@ -39,11 +39,28 @@ load(int fd)
 {
 
 
-    char buf[20];
-    int n;
+    char buf[1024];
+    char prevline[512];
+    char nextline[512];
+    int n , i;
+    int l =0;
+    int start; int end;
+    bool endoflineafterfor;
+    char *s=(char *)calloc(230*sizeof(char));
 
-    while((n = read(fd, buf, sizeof(buf))) > 0)
-        write(1, buf, n);
+    while((n = read(fd, buf, sizeof(buf))) > 0){
+
+        for(i=0; i<n; i++){
+
+            if(buf[i] == '\n'){
+                //Increasing line count
+                l++;
+
+            }
+        }
+
+    }
+
     if(n < 0){
         printf(1, "Uniq: read error\n");
         exit();
