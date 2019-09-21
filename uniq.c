@@ -57,12 +57,12 @@ load(int fd)
             nextline[i] = buf[i];
             if(buf[i] == '\n'){
                 int count = 0;
-                int n = 230;
-                while(n > 0){
-                    if(nextline[n] == prevline[n]){
+                int k = 230;
+                while(k > 0){
+                    if(nextline[k] == prevline[k]){
                         count++;
                     }
-                    n--;
+                    k--;
                 }
                 printf(1,count);
 
