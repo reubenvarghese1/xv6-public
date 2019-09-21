@@ -39,7 +39,7 @@ load(int fd)
 {
 
 
-    char buf[1024];
+    char buf[20];
    // char prevline[512];
     //char nextline[512];
     int n , i;
