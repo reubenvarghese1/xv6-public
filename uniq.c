@@ -51,8 +51,10 @@ load(int fd)
 
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
-        write(1,buf,n);
-
+        int y =0;
+        for(y=0;y<n;y++){
+            printf(1,buf[y]);
+        }
     }
 
 
