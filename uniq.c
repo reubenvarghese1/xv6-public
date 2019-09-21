@@ -53,7 +53,7 @@ load(int fd)
     while((n = read(fd, buf, sizeof(buf))) > 0){
         int y =0;
         for(y=0;y<n;y++){
-            printf(1,buf[y]);
+            printf( "%.*s", 1, buf[y] );
         }
     }
 
