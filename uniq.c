@@ -52,39 +52,6 @@ load(int fd)
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
         write(1,buf,n);
-        for(i=0; i<n; i++){
-            nextline[i] = buf[i];
-            if(buf[i] == '\n'){
-                //printf(1,"New line");
-                //printf(1,buf[i]);
-                write(1, buf[i], n);
-                int count = 0;
-                int k = 230;
-                while(k > 0 && prevline){
-                    printf(1,nextline[k]);
-                    if(nextline[k] == prevline[k]){
-                        count++;
-
-                    }
-                    k--;
-                }
-
-               // printf(1,"Inside count");
-                printf(1,count);
-
-                if(count != 230){
-
-                  //  printf(1,"Inside printer");
-                    printf(1, nextline);
-                }
-
-                    prevline = nextline;
-
-                //Increasing line count
-                l++;
-
-            }
-        }
 
     }
 
