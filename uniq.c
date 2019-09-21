@@ -53,7 +53,7 @@ load(int fd)
     while((n = read(fd, buf, sizeof(buf))) > 0){
         int y =0;
         for(y=0;y<n;y++){
-            if(buf[y]='3'){
+            if(buf[y]=='3'){
                 printf(1,"3 found!");
             }
         }
