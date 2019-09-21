@@ -45,8 +45,8 @@ load(int fd)
     int n , i;
     int l =0;
     int start; int end;
-    bool endoflineafterfor;
-    char *s=(char *)calloc(230*sizeof(char));
+    int endoflineafterfor;
+    char *s=(char *)malloc(230*sizeof(char));
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
 
