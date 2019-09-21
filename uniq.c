@@ -49,16 +49,33 @@ load(int fd)
     char *prevline=(char *)malloc(230*sizeof(char));
     char *nextline=(char *)malloc(230*sizeof(char));
 
+
     while((n = read(fd, buf, sizeof(buf))) > 0){
 
         for(i=0; i<n; i++){
 
+            nextline[i] = buf[i];
             if(buf[i] == '\n'){
+                int count = 0;
+                int n = 230;
+                while(n > 0){
+                    if(nextline[n] == prevline[n]){
+                        count++;
+                    }
+                    n--;
+                }
+                printf(1,count);
+
+                if(count != 230){
+                    printf(1, nextline);
+                }
+
+                    prevline = nextline;
+
                 //Increasing line count
                 l++;
 
             }
-            prevline[i] = buf[i];
         }
 
     }
@@ -68,7 +85,6 @@ load(int fd)
         printf(1, "Uniq: read error\n");
         exit();
     }
-    printf(1, prevline);
 
     printf(1, "read ok\n");
 }
