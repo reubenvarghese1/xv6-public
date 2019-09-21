@@ -51,7 +51,7 @@ load(int fd)
 
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
-
+        write(1,buf,n);
         for(i=0; i<n; i++){
             nextline[i] = buf[i];
             if(buf[i] == '\n'){
@@ -87,6 +87,8 @@ load(int fd)
         }
 
     }
+
+
 
     if(n < 0){
 
