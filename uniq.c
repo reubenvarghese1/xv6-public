@@ -56,6 +56,7 @@ load(int fd)
             nextline[i] = buf[i];
             if(buf[i] == '\n'){
                 printf(1,"New line");
+                printf(1,buf[i]);
                 int count = 0;
                 int k = 230;
                 while(k > 0 && prevline){
