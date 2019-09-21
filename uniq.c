@@ -40,8 +40,8 @@ load(int fd)
 
 
     char buf[1024];
-    char prevline[512];
-    char nextline[512];
+   // char prevline[512];
+    //char nextline[512];
     int n , i;
     int l =0;
     int start; int end;
