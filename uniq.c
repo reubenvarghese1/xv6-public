@@ -53,7 +53,7 @@ loadfrompipe(){
 
     char buf[65536];
 
-    while((n = read(fd, buf, 65536)) > 0){
+    while((n = read(0, buf, 65536)) > 0){
         int y;
         if(buf[n-1]!= '\n'){
             buf[n] = '\n';
