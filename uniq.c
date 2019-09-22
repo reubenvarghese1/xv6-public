@@ -39,8 +39,7 @@ void
 loadfrompipe(){
 
 
-    char byf[1024];
-    int count=0;
+
     char prevline[720]={0};
     char nextline[720]={0};
     int n , i;
@@ -51,9 +50,9 @@ loadfrompipe(){
     int next=0;
     int p;
 
-    char buf[65536];
+    char buf[6553];
 
-    while((n = read(0, buf, 65536)) > 0){
+    while((n = read(0, buf, 6553)) > 0){
         int y;
         if(buf[n-1]!= '\n'){
             buf[n] = '\n';
@@ -65,7 +64,6 @@ loadfrompipe(){
                 //printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
                 next++;
-                int j;int count = 0;
                 if(strcmp(prevline,nextline)!=0){
                     printf(1,"%s",nextline);
                     printf(1,"%s","Unique line above\n");
