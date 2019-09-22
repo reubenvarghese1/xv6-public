@@ -68,9 +68,13 @@ load(int fd)
                         printf(1,"%c",prevline[k]);
                     }
                 }
-                prevline = nextline;
 
-=            }
+                //copying one array to another
+                for (int m = 0; m < 720; ++m) {
+                    prevline[m] = nextline[m];
+                }
+
+            }
             else{
                 //Put stuff into next line if character isnt new line
                 nextline[next] = buf[y];
