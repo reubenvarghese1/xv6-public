@@ -193,7 +193,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         if (cflag == 1){
                             int yk;
                             printf("%d",linecounter);
-                            for (yk = prevstart;  yk <prevende ; yk++) {
+                            for (yk = prevstart;  yk <prevend ; yk++) {
                                 printf(1,"%c",buf[yk]);
                             }
                             linecounter = 1;
