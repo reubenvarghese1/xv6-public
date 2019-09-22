@@ -133,7 +133,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int linecounter=1;
     //Previous file in buffer count
     int prevstart =0;
-    int prevend =0;
+    int prevend =0;int printedfirsttime=0;
 
     while((p = read(qt, byf, sizeof(byf))) > 0){
         int k;
@@ -193,7 +193,10 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         if (cflag == 1){
                             int yk;
                             //printf("%s","Hi buddy");
-                            printf(1,"%d\n",linecounter);
+                            if(printedfirsttime > 1){
+                                printf(1,"%d ",linecounter);
+                            }
+
                             for (yk = prevstart;  yk <prevend ; yk++) {
                                 printf(1,"%c",buf[yk]);
                             }
@@ -202,6 +205,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                             //If last line and last two lines not equal, then print last line.
                             if(y+2>n){
                                 int ymk;
+                                printf(1,"%d ",linecounter);
                                 for (ymk= prevend;  ymk <n ; ymk++) {
                                     printf(1,"%c",buf[ymk]);
                                 }
@@ -219,14 +223,16 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                     }
                     else{
                         //checking if end of file reached
+                        linecounter ++;
                         if(y+2>n){
                             int ym;
+                            printf(1,"%d ",linecounter);
                             for (ym = prevend;  ym <n ; ym++) {
                                 printf(1,"%c",buf[ym]);
                             }
                         }
 
-                        linecounter ++;
+
                     }
                 }
 
