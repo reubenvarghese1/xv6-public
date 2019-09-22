@@ -92,7 +92,6 @@ load(int fd)
                 //Put stuff into next line if character isnt new line
                 nextline[next] = buf[y];
                 next++;
-                if()
             }
         }
     }
