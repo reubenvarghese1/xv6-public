@@ -198,6 +198,14 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                                 printf(1,"%c",buf[yk]);
                             }
                             linecounter = 1;
+
+                            //If last line and last two lines not equal, then print last line.
+                            if(y+2>n){
+                                int ymk;
+                                for (ymk= prevend;  ymk <n ; ymk++) {
+                                    printf(1,"%c",buf[ym]);
+                                }
+                            }
                         }
                         else{
                             int q;
