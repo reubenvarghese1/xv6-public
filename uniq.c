@@ -129,6 +129,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int prev=0;
     int next=0;
     int p;
+    int alreadyusedlines[500]={};int printedlinenumber=0;
 
     while((p = read(qt, byf, sizeof(byf))) > 0){
         int k;
@@ -155,11 +156,27 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 int j;int count = 0;
                 if (dflag){
                     if(strcmp(prevline,nextline)==0){
-                        int q;
-                        for (q = startofline; q < y+1; q++) {
-                            printf(1,"%c",buf[q]);
+                        int q;int calculateascii = 0;
+                        int h;
+                        //skipping last character hence next-1
+                        for(h=0;h<next-1;h++){
+                            calculateascii = calculateascii + nextline[h] + 0;
                         }
-
+                        int contains = 0;int y;
+                        //calculating ascii for line
+                        for(y=0;y<printedlinenumber;y++){
+                            if (alreadyusedlines[y] == calculateascii){
+                                contains =1;
+                            }
+                        }
+                        //print if already not printed
+                        if (contains ==0){
+                            for (q = startofline; q < y+1; q++) {
+                                printf(1,"%c",buf[q]);
+                            }
+                            alreadyusedlines[printedlinenumber] = calculateascii;
+                            printedlinenumber++
+                        }
                         // printf(1,"%s","Unique line above\n");
                     }
                 }
