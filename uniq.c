@@ -162,10 +162,10 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         for(h=0;h<next-1;h++){
                             calculateascii = calculateascii + nextline[h] + 0;
                         }
-                        int contains = 0;int y;
+                        int contains = 0;int ym;
                         //calculating ascii for line
-                        for(y=0;y<printedlinenumber;y++){
-                            if (alreadyusedlines[y] == calculateascii){
+                        for(ym=0;ym<printedlinenumber;ym++){
+                            if (alreadyusedlines[ym] == calculateascii){
                                 printf(1,"%s%d","Checking for: ",calculateascii);
                                 contains =1;
                                 break;
