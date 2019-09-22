@@ -175,7 +175,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                                 printf(1,"%c",buf[q]);
                             }
                             alreadyusedlines[printedlinenumber] = calculateascii;
-                            printedlinenumber++
+                            printedlinenumber++;
                         }
                         // printf(1,"%s","Unique line above\n");
                     }
