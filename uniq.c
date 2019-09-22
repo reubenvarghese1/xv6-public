@@ -270,6 +270,7 @@ main(int argc, char *argv[])
         }
         else if(strcmp(argv[i] , "-d") == 0){
             dflag = 1;
+            iflag =1;
             printf(1,"%s","D flag set\n");
         }
         else if(strcmp(argv[i] , "-i") == 0){
