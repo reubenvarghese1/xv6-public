@@ -51,6 +51,10 @@ load(int fd)
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
         int y;
+        if(buf[n-1]!= '\n'){
+            buf[n] = '\n';
+            n++;
+        }
         for(y=0;y<n;y++){
             if(buf[y]=='\n'){
                 printf(1,"%c",buf[y-1]);
@@ -88,6 +92,7 @@ load(int fd)
                 //Put stuff into next line if character isnt new line
                 nextline[next] = buf[y];
                 next++;
+                if()
             }
         }
     }
