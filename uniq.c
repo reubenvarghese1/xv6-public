@@ -70,7 +70,8 @@ load(int fd)
                 }
 
                 //copying one array to another
-                for (int m = 0; m < 720; ++m) {
+                int m;
+                for (m = 0; m < 720; ++m) {
                     prevline[m] = nextline[m];
                 }
 
