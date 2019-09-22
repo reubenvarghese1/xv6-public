@@ -229,7 +229,7 @@ main(int argc, char *argv[])
             dflag = 1;
             printf(1,"%s","D flag set\n");
         }
-        else if(argv[i] == "-i"){
+        else if(argv[i] == '-i'){
             iflag = 1;
             printf(1,"%s","I flag set\n");
         }
