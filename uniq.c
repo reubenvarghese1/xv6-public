@@ -40,22 +40,31 @@ load(int fd)
 
 
     char buf[20];
-   // char prevline[512];
-    //char nextline[512];
+    char prevline[512]={0};
+    char nextline[512]={0};
     int n , i;
     int l =0;
     int start; int end;
     int endoflineafterfor;
-    char *prevline=(char *)malloc(230*sizeof(char));
-    char *nextline=(char *)malloc(230*sizeof(char));
-
+    int prev=0;
+    int next=0;
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
-        int y =0;
+        int y;
         for(y=0;y<n;y++){
-            if(buf[y]=='3'){
-                printf(1,"3 found!");
-            }
+            nextline[next] = buf[y];
+            printf(1,"%s",nextline[next]);
+            next++;
+//            if(buf[y]=='\n'){
+//
+//
+//                printf(1,"3 found!");
+//            }
+//            else{
+//                //Put stuff into next line if character isnt new line
+//                nextline[next] = buf[y];
+//                next++;
+//            }
         }
     }
 
