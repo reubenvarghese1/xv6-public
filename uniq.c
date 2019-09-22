@@ -78,6 +78,7 @@ load(int fd)
                     prevline[m] = nextline[m];
                 }
                 next = 0;
+                printf(1,"%s%d","yomana",strlen(prevline));
             }
             else{
                 //Put stuff into next line if character isnt new line
