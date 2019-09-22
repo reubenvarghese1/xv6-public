@@ -44,6 +44,7 @@ loadfrompipe(int cflag,int dflag,int iflag){
     char nextline[720]={0};
     int n , i;
     int l =0;
+    int startofline=0;
     int start; int end;
     int endoflineafterfor;
     int prev=0;
@@ -60,7 +61,7 @@ loadfrompipe(int cflag,int dflag,int iflag){
     int prevstart =0;
     int prevend =0;int printedfirsttime=0;
 
-    while((n = read(0, buf, count)) > 0){
+    while((n = read(0, buf, sizeof(buf))) > 0){
         int y;
         if(buf[n-1]!= '\n'){
             buf[n] = '\n';
