@@ -428,10 +428,33 @@ main(int argc, char *argv[])
             printf(1,"%s","I flag set\n");
         }
         else{
-            if((argc-argscount) <=1){
-                printf("%s","Calling pipeloader\n");
-                loadfrompipe(cflag,dflag,iflag);
-                exit();
+            continue;
+        }
+    }
+
+    if((argc-argscount) <=1){
+        printf("%s","Calling pipeloader\n");
+        loadfrompipe(cflag,dflag,iflag);
+        exit();
+    }
+    else{
+        for(i = 1; i < argc; i++){
+            if (strcmp(argv[i] , "-c") == 0){
+                cflag = 1;
+                argscount++;
+                printf(1,"%s","C flag set\n");
+            }
+            else if(strcmp(argv[i] , "-d") == 0){
+                cflag = 0;
+                dflag = 1;
+                iflag =1;
+                argscount++;
+                printf(1,"%s","D flag set\n");
+            }
+            else if(strcmp(argv[i] , "-i") == 0){
+                iflag = 1;
+                argscount++;
+                printf(1,"%s","I flag set\n");
             }
             else{
                 if((fd = open(argv[i], O_RDONLY)) < 0){
@@ -446,7 +469,6 @@ main(int argc, char *argv[])
                 close(fd);
                 close(qt);
             }
-
         }
     }
 
