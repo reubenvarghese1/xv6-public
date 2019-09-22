@@ -428,7 +428,8 @@ main(int argc, char *argv[])
             printf(1,"%s","I flag set\n");
         }
         else{
-            if(argc-argscount <=1){
+            if((argc-argscount) <=1){
+                printf("%s","Calling pipeloader\n");
                 loadfrompipe(cflag,dflag,iflag);
                 exit();
             }
