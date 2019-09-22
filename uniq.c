@@ -55,8 +55,8 @@ loadfrompipe(int cflag,int dflag,int iflag){
     char buf[1200];
 
 
-    int alreadyusedlines[200]={0};
-    int alreadyusedlinesprinted[100]={0};
+    int alreadyusedlines[20]={0};
+    int alreadyusedlinesprinted[10]={0};
     int dupnumber = 0;
     int printedlinenumber=0;
     int linecounter=1;
