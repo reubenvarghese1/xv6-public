@@ -155,7 +155,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
-                if (dflag){
+                if (dflag == 1){
                         int q;int calculateascii = 0;
                         int h;
                         //skipping last character hence next-1. Calculating ascii for line
