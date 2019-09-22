@@ -48,13 +48,16 @@ load(int fd)
     int endoflineafterfor;
     int prev=0;
     int next=0;
+    int p;
 
-    while((n = read(fd, buf, sizeof(buf))) > 0){
+    while((p = read(fd, buf, sizeof(buf))) > 0){
         int k;
-        for(k=0;k<n;k++){
+        for(k=0;k<p;k++){
             printf(1,"%c",buf[k]);
         }
     }
+
+
     while((n = read(fd, buf, sizeof(buf))) > 0){
         int y;
         if(buf[n-1]!= '\n'){
