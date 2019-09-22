@@ -39,9 +39,9 @@ load(int fd)
 {
 
 
-    char buf[20];
-    char prevline[512]={0};
-    char nextline[512]={0};
+    char buf[1024];
+    char prevline[720]={0};
+    char nextline[720]={0};
     int n , i;
     int l =0;
     int start; int end;
@@ -52,19 +52,30 @@ load(int fd)
     while((n = read(fd, buf, sizeof(buf))) > 0){
         int y;
         for(y=0;y<n;y++){
-            nextline[next] = buf[y];
-            printf(1,"%c",nextline[next]);
-            next++;
-//            if(buf[y]=='\n'){
-//
-//
-//                printf(1,"3 found!");
-//            }
-//            else{
-//                //Put stuff into next line if character isnt new line
-//                nextline[next] = buf[y];
-//                next++;
-//            }
+            if(buf[y]=='\n'){
+                int j;int count = 0;
+                for (j = 0; j < next; j++) {
+                    if(prevline[j] == nextline[j]){
+                        count++;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(count == next){
+                    int k;
+                    for (k = 0; k < next; ++k) {
+                        printf(1,"%c",prevline[k]);
+                    }
+                }
+                prevline = nextline;
+
+=            }
+            else{
+                //Put stuff into next line if character isnt new line
+                nextline[next] = buf[y];
+                next++;
+            }
         }
     }
 
