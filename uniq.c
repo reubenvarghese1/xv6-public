@@ -58,7 +58,7 @@ load(int fd)
                 int j;int count = 0;
                 for (j = 0; j < next; j++) {
                     if(prevline[j] == nextline[j]){
-                        //printf(1,"%c",prevline[j]);
+                        printf(1,"%c",prevline[j]);
                         count++;
                     }
                     else{
@@ -68,13 +68,13 @@ load(int fd)
                 if(count == next){
                     int k;
                     for (k = 0; k < next; k++) {
-                        printf(1,"%c",prevline[k]);
+                        //printf(1,"%c",prevline[k]);
                     }
                 }
 
                 //copying one array to another
                 int m;
-                for (m = 0; m < 720; ++m) {
+                for (m = 0; m < 720; m++) {
                     prevline[m] = nextline[m];
                 }
                 next = 0;
