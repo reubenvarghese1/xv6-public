@@ -166,14 +166,14 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         //calculating ascii for line
                         for(ym=0;ym<printedlinenumber;ym++){
                             if (alreadyusedlines[ym] == calculateascii){
-                                printf(1,"%s%d","Checking for: ",calculateascii);
+                               // printf(1,"%s%d","Checking for: ",calculateascii);
                                 contains =1;
                                 break;
                             }
                         }
                         //print if already not printed
                         if (contains == 0){
-                            printf(1,"%s","COntains is zero");
+                            //printf(1,"%s","COntains is zero");
                             for (q = startofline; q < y+1; q++) {
                                 printf(1,"%c",buf[q]);
                             }
