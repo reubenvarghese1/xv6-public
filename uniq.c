@@ -34,6 +34,86 @@ save(void)
     close(fd);
 }
 
+
+void
+loadfrompipe(){
+
+
+    char byf[1024];
+    int count=0;
+    char prevline[720]={0};
+    char nextline[720]={0};
+    int n , i;
+    int l =0;
+    int start; int end;
+    int endoflineafterfor;
+    int prev=0;
+    int next=0;
+    int p;
+
+    char buf[65536];
+
+    while((n = read(fd, buf, 65536)) > 0){
+        int y;
+        if(buf[n-1]!= '\n'){
+            buf[n] = '\n';
+            n++;
+        }
+        for(y=0;y<n;y++){
+            //printf(1,"%c",buf[y]);
+            if(buf[y]=='\n'){
+                //printf(1,"%c",buf[y-1]);
+                nextline[next]=buf[y];
+                next++;
+                int j;int count = 0;
+                if(strcmp(prevline,nextline)!=0){
+                    printf(1,"%s",nextline);
+                    printf(1,"%s","Unique line above\n");
+                }
+
+//                for (j = 0; j < next; j++) {
+//                    if(prevline[j] == nextline[j]){
+//                        printf(1,"%c",prevline[j]);
+//                        count++;
+//                    }
+//                    else{
+//                        break;
+//                    }
+//                }
+//                if(count == next){
+//                    int k;
+//                    for (k = 0; k < next; k++) {
+//                        //printf(1,"%c",prevline[k]);
+//                    }
+//                }
+
+                //copying one array to another
+                int m;
+                for (m = 0; m < 720; m++) {
+                    prevline[m] = nextline[m];
+                }
+                next = 0;
+                // printf(1,"%s%d","yomana",strlen(prevline));
+            }
+            else{
+                //Put stuff into next line if character isnt new line
+                nextline[next] = buf[y];
+                next++;
+            }
+        }
+    }
+
+
+
+    if(n < 0){
+
+        printf(1, "Uniq: read error\n");
+        exit();
+    }
+
+    printf(1, "read ok\n");
+}
+
 void
 load(int fd,int qt)
 {
@@ -79,6 +159,7 @@ load(int fd,int qt)
                     printf(1,"%s",nextline);
                     printf(1,"%s","Unique line above\n");
                 }
+
 //                for (j = 0; j < next; j++) {
 //                    if(prevline[j] == nextline[j]){
 //                        printf(1,"%c",prevline[j]);
@@ -128,7 +209,7 @@ main(int argc, char *argv[])
     int fd,i,qt;
     save();
     if(argc <= 1){
-        load(0,0);
+        loadfrompipe();
         exit();
     }
 
