@@ -57,7 +57,43 @@ load(int fd)
         }
         for(y=0;y<n;y++){
             printf(1,"%c",buf[y]);
+            if(buf[y]=='\n'){
+                //printf(1,"%c",buf[y-1]);
+                nextline[next]=buf[y];
+                next++;
+                int j;int count = 0;
+                if(strcmp(prevline,nextline)!=0){
+                    printf(1,"%s",prevline);
+                }
+//                for (j = 0; j < next; j++) {
+//                    if(prevline[j] == nextline[j]){
+//                        printf(1,"%c",prevline[j]);
+//                        count++;
+//                    }
+//                    else{
+//                        break;
+//                    }
+//                }
+//                if(count == next){
+//                    int k;
+//                    for (k = 0; k < next; k++) {
+//                        //printf(1,"%c",prevline[k]);
+//                    }
+//                }
 
+                //copying one array to another
+                int m;
+                for (m = 0; m < 720; m++) {
+                    prevline[m] = nextline[m];
+                }
+                next = 0;
+               // printf(1,"%s%d","yomana",strlen(prevline));
+            }
+            else{
+                //Put stuff into next line if character isnt new line
+                nextline[next] = buf[y];
+                next++;
+            }
         }
     }
 
