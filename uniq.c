@@ -36,7 +36,7 @@ save(void)
 
 
 void
-loadfrompipe(){
+loadfrompipe(int cflag,int dflag,int iflag){
 
 
 
@@ -50,9 +50,17 @@ loadfrompipe(){
     int next=0;
     int p;
 
+
     char buf[1200];
 
-    while((n = read(0, buf, sizeof(buf))) > 0){
+
+    int alreadyusedlines[200]={0};int printedlinenumber=0;
+    int linecounter=1;
+    //Previous file in buffer count
+    int prevstart =0;
+    int prevend =0;int printedfirsttime=0;
+
+    while((n = read(0, buf, count)) > 0){
         int y;
         if(buf[n-1]!= '\n'){
             buf[n] = '\n';
@@ -64,10 +72,85 @@ loadfrompipe(){
                 //printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
                 next++;
-                if(strcmp(prevline,nextline)!=0){
-                    printf(1,"%s",nextline);
-                    //printf(1,"%s","Unique line above\n");
+                int j;int count = 0;
+                if (dflag == 1){
+                    int q;int calculateascii = 0;
+                    int h;
+                    //skipping last character hence next-1. Calculating ascii for line
+                    for(h=0;h<next-1;h++){
+                        calculateascii = calculateascii + nextline[h] + 0;
+                    }
+                    int contains = 0;int ym;
+                    //calculating ascii for line
+                    for(ym=0;ym<printedlinenumber;ym++){
+                        if (alreadyusedlines[ym] == calculateascii){
+                            // printf(1,"%s%d","Checking for: ",calculateascii);
+                            contains =1;
+                            break;
+                        }
+                    }
+                    //print if already not printed
+                    if (contains == 0){
+                        //printf(1,"%s","COntains is zero");
+                        for (q = startofline; q < y+1; q++) {
+                            printf(1,"%c",buf[q]);
+                        }
+                        alreadyusedlines[printedlinenumber] = calculateascii;
+                        printedlinenumber++;
+                    }
+                    // printf(1,"%s","Unique line above\n");
                 }
+
+                else{
+
+                    if(strcmp(prevline,nextline)!=0){
+                        if (cflag == 1){
+                            int yk;
+                            //printf("%s","Hi buddy");
+                            if(printedfirsttime == 1){
+                                printf(1,"%d ",linecounter);
+                            }
+
+                            for (yk = prevstart;  yk <prevend ; yk++) {
+                                printf(1,"%c",buf[yk]);
+                            }
+                            linecounter = 1;
+
+                            //If last line and last two lines not equal, then print last line.
+                            if(y+2>n){
+                                int ymk;
+                                printf(1,"%d ",linecounter);
+                                for (ymk= prevend;  ymk <n ; ymk++) {
+                                    printf(1,"%c",buf[ymk]);
+                                }
+                            }
+                            printedfirsttime =1;
+                        }
+                        else{
+                            int q;
+                            for (q = startofline; q < y+1; q++) {
+                                printf(1,"%c",buf[q]);
+                            }
+                        }
+
+
+                        // printf(1,"%s","Unique line above\n");
+                    }
+                    else{
+                        //checking if end of file reached
+                        linecounter ++;
+                        if(y+2>n){
+                            int ym;
+                            printf(1,"%d ",linecounter);
+                            for (ym = prevend;  ym <n ; ym++) {
+                                printf(1,"%c",buf[ym]);
+                            }
+                        }
+
+
+                    }
+                }
+
 
 //                for (j = 0; j < next; j++) {
 //                    if(prevline[j] == nextline[j]){
@@ -85,17 +168,34 @@ loadfrompipe(){
 //                    }
 //                }
 
+
+                //Writing location of previous line ka starting and ending in terms of original buf
+                prevstart = startofline;
+                prevend = y+1;
+
                 //copying one array to another
                 int m;
                 for (m = 0; m < 720; m++) {
                     prevline[m] = nextline[m];
                 }
                 next = 0;
+                startofline = y+1;
                 // printf(1,"%s%d","yomana",strlen(prevline));
             }
             else{
                 //Put stuff into next line if character isnt new line
-                nextline[next] = buf[y];
+                if (iflag ==1){
+                    //converting stuff to lowercase for comparison
+                    if(buf[y]>='A' && buf[y]<='Z'){
+                        nextline[next]=buf[y]+32;
+                    }
+                    else{
+                        nextline[next]=buf[y];
+                    }
+                }
+                else {
+                    nextline[next] = buf[y];
+                }
                 next++;
             }
         }
@@ -303,10 +403,6 @@ main(int argc, char *argv[])
 {
     int fd,i,qt;
     save();
-    if(argc <= 1){
-        loadfrompipe();
-        exit();
-    }
 
     int cflag=0;
     int dflag =0;
@@ -315,30 +411,40 @@ main(int argc, char *argv[])
     for(i = 1; i < argc; i++){
         if (strcmp(argv[i] , "-c") == 0){
             cflag = 1;
+            argscount++;
             printf(1,"%s","C flag set\n");
         }
         else if(strcmp(argv[i] , "-d") == 0){
             cflag = 0;
             dflag = 1;
             iflag =1;
+            argscount++;
             printf(1,"%s","D flag set\n");
         }
         else if(strcmp(argv[i] , "-i") == 0){
             iflag = 1;
+            argscount++;
             printf(1,"%s","I flag set\n");
         }
         else{
-            if((fd = open(argv[i], O_RDONLY)) < 0){
-                printf(1, "Uniq: cannot open %s\n", argv[i]);
+            if(argc-argscount <=1){
+                loadfrompipe(cflag,dflag,iflag);
                 exit();
             }
-            if((qt = open(argv[i], O_RDONLY)) < 0){
-                printf(1, "Uniq: cannot open %s\n", argv[i]);
-                exit();
+            else{
+                if((fd = open(argv[i], O_RDONLY)) < 0){
+                    printf(1, "Uniq: cannot open %s\n", argv[i]);
+                    exit();
+                }
+                if((qt = open(argv[i], O_RDONLY)) < 0){
+                    printf(1, "Uniq: cannot open %s\n", argv[i]);
+                    exit();
+                }
+                load(fd,qt,cflag,dflag,iflag);
+                close(fd);
+                close(qt);
             }
-            load(fd,qt,cflag,dflag,iflag);
-            close(fd);
-            close(qt);
+
         }
     }
 
