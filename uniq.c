@@ -53,6 +53,7 @@ load(int fd)
         int y;
         for(y=0;y<n;y++){
             if(buf[y]=='\n'){
+                printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
