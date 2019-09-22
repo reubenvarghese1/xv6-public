@@ -55,7 +55,10 @@ loadfrompipe(int cflag,int dflag,int iflag){
     char buf[1200];
 
 
-    int alreadyusedlines[200]={0};int printedlinenumber=0;
+    int alreadyusedlines[200]={0};
+    int alreadyusedlinesprinted[100]={0};
+    int dupnumber = 0;
+    int printedlinenumber=0;
     int linecounter=1;
     //Previous file in buffer count
     int prevstart =0;
@@ -81,24 +84,33 @@ loadfrompipe(int cflag,int dflag,int iflag){
                     for(h=0;h<next-1;h++){
                         calculateascii = calculateascii + nextline[h] + 0;
                     }
-                    int contains = 0;int ym;
-                    //calculating ascii for line
+
+                    int ym;
+                    //calculating ascii for line and checking if it has been used before
                     for(ym=0;ym<printedlinenumber;ym++){
                         if (alreadyusedlines[ym] == calculateascii){
-                            // printf(1,"%s%d","Checking for: ",calculateascii);
-                            contains =1;
-                            break;
+                            int bk;int contains = 0;
+                            //Now to check if it has been printed before
+                            for (bk=0;bk<dupnumber;bk++){
+                                if(alreadyusedlinesprinted[bk] == calculateascii){
+                                    contains=1;
+                                    break;
+                                }
+                            }
+                            //print if not already printed
+                            if(contains == 0){
+                                alreadyusedlinesprinted[dupnumber] = calculateascii;
+                                dupnumber++;
+                                for (q = startofline; q < y+1; q++) {
+                                    printf(1,"%c",buf[q]);
+                                }
+                            }
                         }
                     }
-                    //print if already not printed
-                    if (contains == 0){
-                        //printf(1,"%s","COntains is zero");
-                        for (q = startofline; q < y+1; q++) {
-                            printf(1,"%c",buf[q]);
-                        }
-                        alreadyusedlines[printedlinenumber] = calculateascii;
-                        printedlinenumber++;
-                    }
+                    //adding ascii of all lines to the list of used lines
+                    alreadyusedlines[printedlinenumber] = calculateascii;
+                    printedlinenumber++;
+
                     // printf(1,"%s","Unique line above\n");
                 }
 
