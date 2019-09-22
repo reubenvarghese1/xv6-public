@@ -40,6 +40,7 @@ load(int fd,int qt)
 
 
     char buf[1024];
+    char byf[1024];
     char prevline[720]={0};
     char nextline[720]={0};
     int n , i;
@@ -50,10 +51,10 @@ load(int fd,int qt)
     int next=0;
     int p;
 
-    while((p = read(fd, buf, sizeof(buf))) > 0){
+    while((p = read(qt, byf, sizeof(byf))) > 0){
         int k;
         for(k=0;k<p;k++){
-            printf(1,"%c",buf[k]);
+            printf(1,"%c",byf[k]);
         }
     }
 
