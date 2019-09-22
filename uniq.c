@@ -213,7 +213,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         //checking if end of file reached
                         if(y+2>n){
                             int ym;
-                            for (ym = prevstart;  ym <prevend ; ym++) {
+                            for (ym = prevend;  ym <n ; ym++) {
                                 printf(1,"%c",buf[ym]);
                             }
                         }
