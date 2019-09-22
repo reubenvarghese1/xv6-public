@@ -167,7 +167,9 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         //calculating ascii for line
                         for(y=0;y<printedlinenumber;y++){
                             if (alreadyusedlines[y] == calculateascii){
+                                printf(1,"%s%d","Checking for: ",calculateascii);
                                 contains =1;
+                                break;
                             }
                         }
                         //print if already not printed
