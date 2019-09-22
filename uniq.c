@@ -50,9 +50,9 @@ loadfrompipe(){
     int next=0;
     int p;
 
-    char buf[6553];
+    char buf[1200];
 
-    while((n = read(0, buf, 6553)) > 0){
+    while((n = read(0, buf, sizeof(buf))) > 0){
         int y;
         if(buf[n-1]!= '\n'){
             buf[n] = '\n';
