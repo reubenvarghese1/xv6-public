@@ -39,8 +39,9 @@ load(int fd,int qt)
 {
 
 
-    char buf[1024];
+
     char byf[1024];
+    int count=0;
     char prevline[720]={0};
     char nextline[720]={0};
     int n , i;
@@ -54,12 +55,14 @@ load(int fd,int qt)
     while((p = read(qt, byf, sizeof(byf))) > 0){
         int k;
         for(k=0;k<p;k++){
-            printf(1,"%c",byf[k]);
+            count++;
         }
     }
 
+    char *buf = malloc( sizeof(char) * count);
 
-    while((n = read(fd, buf, sizeof(buf))) > 0){
+
+    while((n = read(fd, buf, count)) > 0){
         int y;
         if(buf[n-1]!= '\n'){
             buf[n] = '\n';
