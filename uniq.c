@@ -153,14 +153,27 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
-                if(strcmp(prevline,nextline)!=0){
-                    int q;
-                    for (q = startofline; q < y+1; q++) {
-                        printf(1,"%c",buf[q]);
-                    }
+                if (dflag){
+                    if(strcmp(prevline,nextline)==0){
+                        int q;
+                        for (q = startofline; q < y+1; q++) {
+                            printf(1,"%c",buf[q]);
+                        }
 
-                   // printf(1,"%s","Unique line above\n");
+                        // printf(1,"%s","Unique line above\n");
+                    }
                 }
+                else{
+                    if(strcmp(prevline,nextline)!=0){
+                        int q;
+                        for (q = startofline; q < y+1; q++) {
+                            printf(1,"%c",buf[q]);
+                        }
+
+                        // printf(1,"%s","Unique line above\n");
+                    }
+                }
+
 
 //                for (j = 0; j < next; j++) {
 //                    if(prevline[j] == nextline[j]){
