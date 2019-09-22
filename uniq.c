@@ -56,15 +56,15 @@ load(int fd)
             n++;
         }
         for(y=0;y<n;y++){
-            printf(1,"%c",buf[y]);
+            //printf(1,"%c",buf[y]);
             if(buf[y]=='\n'){
                 //printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
                 if(strcmp(prevline,nextline)!=0){
-                    printf(1,"%s",prevline);
-                    printf(1,"%s","Unique line above");
+                    printf(1,"%s",nextline);
+                    printf(1,"%s","Unique line above\n");
                 }
 //                for (j = 0; j < next; j++) {
 //                    if(prevline[j] == nextline[j]){
