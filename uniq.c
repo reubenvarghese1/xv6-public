@@ -158,7 +158,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 if (dflag){
                         int q;int calculateascii = 0;
                         int h;
-                        //skipping last character hence next-1
+                        //skipping last character hence next-1. Calculating ascii for line
                         for(h=0;h<next-1;h++){
                             calculateascii = calculateascii + nextline[h] + 0;
                         }
@@ -172,7 +172,8 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                             }
                         }
                         //print if already not printed
-                        if (contains ==0){
+                        if (contains == 0){
+                            printf(1,"%s","COntains is zero");
                             for (q = startofline; q < y+1; q++) {
                                 printf(1,"%c",buf[q]);
                             }
@@ -180,7 +181,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                             printedlinenumber++;
                         }
                         // printf(1,"%s","Unique line above\n");
-                    }
+                }
 
                 else{
                     if(strcmp(prevline,nextline)!=0){
