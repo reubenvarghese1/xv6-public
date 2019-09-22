@@ -124,7 +124,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     char nextline[720]={0};
     int n , i;
     int l =0;
-    int start; int end;
+    int startofline=0; int end;
     int endoflineafterfor;
     int prev=0;
     int next=0;
@@ -154,7 +154,11 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 next++;
                 int j;int count = 0;
                 if(strcmp(prevline,nextline)!=0){
-                    printf(1,"%s",nextline);
+                    int q;
+                    for (q = startofline; q < y+1; q++) {
+                        printf(1,"%c",buf[q]);
+                    }
+
                    // printf(1,"%s","Unique line above\n");
                 }
 
@@ -180,16 +184,19 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                     prevline[m] = nextline[m];
                 }
                 next = 0;
+                startofline = y+1;
                // printf(1,"%s%d","yomana",strlen(prevline));
             }
             else{
                 //Put stuff into next line if character isnt new line
                 if (iflag ==1){
                     if(buf[y]>='A' && buf[y]<='Z'){
-                        buf[y]=buf[y]+32;
+                        nextline[next]=buf[y]+32;
                     }
                 }
-                nextline[next] = buf[y];
+                else {
+                    nextline[next] = buf[y];
+                }
                 next++;
             }
         }
