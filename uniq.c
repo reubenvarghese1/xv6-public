@@ -190,8 +190,12 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
             else{
                 //Put stuff into next line if character isnt new line
                 if (iflag ==1){
+                    //converting stuff to lowercase for comparison
                     if(buf[y]>='A' && buf[y]<='Z'){
                         nextline[next]=buf[y]+32;
+                    }
+                    else{
+                        nextline[next]=buf[y];
                     }
                 }
                 else {
