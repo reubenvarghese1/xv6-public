@@ -35,7 +35,7 @@ save(void)
 }
 
 void
-load(int fd)
+load(int fd,int qt)
 {
 
 
@@ -121,7 +121,7 @@ load(int fd)
 int
 main(int argc, char *argv[])
 {
-    int fd,i;
+    int fd,i,qt;
     save();
     if(argc <= 1){
         load(0);
@@ -133,8 +133,13 @@ main(int argc, char *argv[])
             printf(1, "Uniq: cannot open %s\n", argv[i]);
             exit();
         }
-        load(fd);
+        if((qt = open(argv[i], O_RDONLY)) < 0){
+            printf(1, "Uniq: cannot open %s\n", argv[i]);
+            exit();
+        }
+        load(fd,qt);
         close(fd);
+        close(qt);
     }
 
     exit();
