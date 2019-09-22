@@ -66,7 +66,7 @@ loadfrompipe(){
                 next++;
                 if(strcmp(prevline,nextline)!=0){
                     printf(1,"%s",nextline);
-                    printf(1,"%s","Unique line above\n");
+                    //printf(1,"%s","Unique line above\n");
                 }
 
 //                for (j = 0; j < next; j++) {
@@ -113,7 +113,7 @@ loadfrompipe(){
 }
 
 void
-load(int fd,int qt)
+load(int fd,int qt,int cflag,int dflag,int iflag)
 {
 
 
@@ -155,7 +155,7 @@ load(int fd,int qt)
                 int j;int count = 0;
                 if(strcmp(prevline,nextline)!=0){
                     printf(1,"%s",nextline);
-                    printf(1,"%s","Unique line above\n");
+                   // printf(1,"%s","Unique line above\n");
                 }
 
 //                for (j = 0; j < next; j++) {
@@ -184,6 +184,11 @@ load(int fd,int qt)
             }
             else{
                 //Put stuff into next line if character isnt new line
+                if (iflag ==1){
+                    if(buf[y]>='A' && buf[y]<='Z'){
+                        buf[y]=buf[y]+32;
+                    }
+                }
                 nextline[next] = buf[y];
                 next++;
             }
@@ -211,18 +216,36 @@ main(int argc, char *argv[])
         exit();
     }
 
+    int cflag=0;
+    int dflag =0;
+    int iflag=0;
+    int argscount = 0;
     for(i = 1; i < argc; i++){
-        if((fd = open(argv[i], O_RDONLY)) < 0){
-            printf(1, "Uniq: cannot open %s\n", argv[i]);
-            exit();
+        if (argv[i] == "-c"){
+            cflag = 1;
+            printf(1,"%s","C flag set\n");
         }
-        if((qt = open(argv[i], O_RDONLY)) < 0){
-            printf(1, "Uniq: cannot open %s\n", argv[i]);
-            exit();
+        else if(argv[i] == "-d"){
+            dflag = 1;
+            printf(1,"%s","D flag set\n");
         }
-        load(fd,qt);
-        close(fd);
-        close(qt);
+        else if(argv[i] == "-i"){
+            iflag = 1;
+            printf(1,"%s","I flag set\n");
+        }
+        else{
+            if((fd = open(argv[i], O_RDONLY)) < 0){
+                printf(1, "Uniq: cannot open %s\n", argv[i]);
+                exit();
+            }
+            if((qt = open(argv[i], O_RDONLY)) < 0){
+                printf(1, "Uniq: cannot open %s\n", argv[i]);
+                exit();
+            }
+            load(fd,qt,cflag,dflag,iflag);
+            close(fd);
+            close(qt);
+        }
     }
 
     exit();
