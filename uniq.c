@@ -130,6 +130,10 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int next=0;
     int p;
     int alreadyusedlines[200]={0};int printedlinenumber=0;
+    int linecounter=1;
+    //Previous file in buffer count
+    int prevstart =0;
+    int prevend =0;
 
     while((p = read(qt, byf, sizeof(byf))) > 0){
         int k;
@@ -184,13 +188,29 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 }
 
                 else{
+
                     if(strcmp(prevline,nextline)!=0){
-                        int q;
-                        for (q = startofline; q < y+1; q++) {
-                            printf(1,"%c",buf[q]);
+                        if (cflag == 1){
+                            int yk;
+                            printf("%d",linecounter);
+                            for (yk = prevstart;  yk <prevende ; yk++) {
+                                printf(1,"%c",buf[yk]);
+                            }
+                            linecounter = 1;
+                        }
+                        else{
+                            int q;
+                            for (q = startofline; q < y+1; q++) {
+                                printf(1,"%c",buf[q]);
+                            }
                         }
 
+
                         // printf(1,"%s","Unique line above\n");
+                    }
+                    else{
+
+                        linecounter ++;
                     }
                 }
 
@@ -210,6 +230,11 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
 //                        //printf(1,"%c",prevline[k]);
 //                    }
 //                }
+
+
+                //Writing location of previous line ka starting and ending in terms of original buf
+                prevstart = startofline;
+                prevend = y+1;
 
                 //copying one array to another
                 int m;
