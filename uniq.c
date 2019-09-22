@@ -156,7 +156,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 next++;
                 int j;int count = 0;
                 if (dflag){
-                    if(strcmp(prevline,nextline)==0){
                         int q;int calculateascii = 0;
                         int h;
                         //skipping last character hence next-1
@@ -182,7 +181,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         }
                         // printf(1,"%s","Unique line above\n");
                     }
-                }
+
                 else{
                     if(strcmp(prevline,nextline)!=0){
                         int q;
