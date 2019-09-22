@@ -203,7 +203,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                             if(y+2>n){
                                 int ymk;
                                 for (ymk= prevend;  ymk <n ; ymk++) {
-                                    printf(1,"%c",buf[ym]);
+                                    printf(1,"%c",buf[ymk]);
                                 }
                             }
                         }
