@@ -50,7 +50,10 @@ load(int fd)
     int next=0;
 
     while((n = read(fd, buf, sizeof(buf))) > 0){
-        printf(1,"%c",buf[n]);
+        int k;
+        for(k=0;k<n;k++){
+            printf(1,"%c",buf[k]);
+        }
     }
     while((n = read(fd, buf, sizeof(buf))) > 0){
         int y;
