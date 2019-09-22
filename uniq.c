@@ -56,6 +56,7 @@ load(int fd)
                 int j;int count = 0;
                 for (j = 0; j < next; j++) {
                     if(prevline[j] == nextline[j]){
+                        printf(1,"%c",prevline[j]);
                         count++;
                     }
                     else{
