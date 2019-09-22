@@ -118,7 +118,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
 
 
 
-    char byf[1024];
+    char *byf = malloc( sizeof(char) * 1024);
     int count=0;
     char prevline[720]={0};
     char nextline[720]={0};
@@ -138,6 +138,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
         }
     }
 
+    free(byf);
     char *buf = malloc( sizeof(char) * count);
 
 
