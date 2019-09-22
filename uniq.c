@@ -219,7 +219,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
 
 
 
-    char *byf = malloc( sizeof(char) * 1024);
+    char *byf = malloc( sizeof(char) * 20);
     int count=0;
     char prevline[720]={0};
     char nextline[720]={0};
