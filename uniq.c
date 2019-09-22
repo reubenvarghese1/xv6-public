@@ -64,6 +64,7 @@ load(int fd)
                 int j;int count = 0;
                 if(strcmp(prevline,nextline)!=0){
                     printf(1,"%s",prevline);
+                    printf(1,"%s","Unique line above");
                 }
 //                for (j = 0; j < next; j++) {
 //                    if(prevline[j] == nextline[j]){
