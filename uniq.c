@@ -124,7 +124,7 @@ main(int argc, char *argv[])
     int fd,i,qt;
     save();
     if(argc <= 1){
-        load(0);
+        load(0,0);
         exit();
     }
 
