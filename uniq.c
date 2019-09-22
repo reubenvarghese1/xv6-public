@@ -129,7 +129,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int prev=0;
     int next=0;
     int p;
-    int alreadyusedlines[500]={0};int printedlinenumber=0;
+    int alreadyusedlines[200]={0};int printedlinenumber=0;
 
     while((p = read(qt, byf, sizeof(byf))) > 0){
         int k;
