@@ -193,7 +193,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         if (cflag == 1){
                             int yk;
                             //printf("%s","Hi buddy");
-                            if(printedfirsttime > 1){
+                            if(printedfirsttime == 1){
                                 printf(1,"%d ",linecounter);
                             }
 
@@ -210,6 +210,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                                     printf(1,"%c",buf[ymk]);
                                 }
                             }
+                            printedfirsttime =1;
                         }
                         else{
                             int q;
