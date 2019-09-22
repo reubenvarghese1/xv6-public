@@ -245,11 +245,11 @@ main(int argc, char *argv[])
     int iflag=0;
     int argscount = 0;
     for(i = 1; i < argc; i++){
-        if (argv[i] == "-c"){
+        if (strcmp(argv[i] , "-c") == 0){
             cflag = 1;
             printf(1,"%s","C flag set\n");
         }
-        else if(argv[i] == "-d"){
+        else if(strcmp(argv[i] , "-d") == 0){
             dflag = 1;
             printf(1,"%s","D flag set\n");
         }
