@@ -192,8 +192,8 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                     if(strcmp(prevline,nextline)!=0){
                         if (cflag == 1){
                             int yk;
-                            printf("%s","Hi buddy");
-                            printf("%d",linecounter);
+                            //printf("%s","Hi buddy");
+                            printf(1,"%d",linecounter);
                             for (yk = prevstart;  yk <prevend ; yk++) {
                                 printf(1,"%c",buf[yk]);
                             }
@@ -296,6 +296,7 @@ main(int argc, char *argv[])
             printf(1,"%s","C flag set\n");
         }
         else if(strcmp(argv[i] , "-d") == 0){
+            cflag = 0;
             dflag = 1;
             iflag =1;
             printf(1,"%s","D flag set\n");
