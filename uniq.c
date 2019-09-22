@@ -56,6 +56,7 @@ load(int fd)
             n++;
         }
         for(y=0;y<n;y++){
+            printf(1,"%c\n",buf[y]);
             if(buf[y]=='\n'){
                 printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
