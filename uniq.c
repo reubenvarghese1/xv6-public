@@ -56,7 +56,7 @@ load(int fd)
                 int j;int count = 0;
                 for (j = 0; j < next; j++) {
                     if(prevline[j] == nextline[j]){
-                       // printf(1,"%c",prevline[j]);
+                        printf(1,"%c",prevline[j]);
                         count++;
                     }
                     else{
@@ -75,7 +75,7 @@ load(int fd)
                 for (m = 0; m < 720; ++m) {
                     prevline[m] = nextline[m];
                 }
-
+                next = 0;
             }
             else{
                 //Put stuff into next line if character isnt new line
