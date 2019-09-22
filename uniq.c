@@ -56,21 +56,24 @@ load(int fd)
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
-                for (j = 0; j < next; j++) {
-                    if(prevline[j] == nextline[j]){
-                        printf(1,"%c",prevline[j]);
-                        count++;
-                    }
-                    else{
-                        break;
-                    }
+                if(strcmp(prevline,nextline)!=0){
+                    printf(1,"%s",prevline);
                 }
-                if(count == next){
-                    int k;
-                    for (k = 0; k < next; k++) {
-                        //printf(1,"%c",prevline[k]);
-                    }
-                }
+//                for (j = 0; j < next; j++) {
+//                    if(prevline[j] == nextline[j]){
+//                        printf(1,"%c",prevline[j]);
+//                        count++;
+//                    }
+//                    else{
+//                        break;
+//                    }
+//                }
+//                if(count == next){
+//                    int k;
+//                    for (k = 0; k < next; k++) {
+//                        //printf(1,"%c",prevline[k]);
+//                    }
+//                }
 
                 //copying one array to another
                 int m;
