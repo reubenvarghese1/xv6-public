@@ -6,15 +6,9 @@ void
 loadfrompipe(int cflag,int dflag,int iflag){
     char prevline[720]={0};
     char nextline[720]={0};
-    int n , i;
-    int l =0;
+    int n;
     int startofline=0;
-    int start; int end;
-    int endoflineafterfor;
-    int prev=0;
     int next=0;
-    int p;
-
 
     char buf[1200];
 
@@ -38,7 +32,6 @@ loadfrompipe(int cflag,int dflag,int iflag){
             if(buf[y]=='\n'){
                 nextline[next]=buf[y];
                 next++;
-                int j;int count = 0;
                 if (dflag == 1){
                     int q;int calculateascii = 0;
                     int h;
@@ -177,11 +170,8 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     free(byf);
     char prevline[720]={0};
     char nextline[720]={0};
-    int n , i;
-    int l =0;
-    int startofline=0; int end;
-    int endoflineafterfor;
-    int prev=0;
+    int n;
+    int startofline=0;
     int next=0;
 
     //The following arrays are to store the ascii values for the d flag
@@ -210,7 +200,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
             if(buf[y]=='\n'){
                 nextline[next]=buf[y];
                 next++;
-                int j;int count = 0;
                 if (dflag == 1){
                         int q;int calculateascii = 0;
                         int h;
@@ -348,7 +337,7 @@ main(int argc, char *argv[])
         else if(strcmp(argv[i] , "-d") == 0){
             cflag = 0;
             dflag = 1;
-            iflag =1;
+           // iflag =1;
             argscount++;
         }
         else if(strcmp(argv[i] , "-i") == 0){
@@ -373,7 +362,7 @@ main(int argc, char *argv[])
             else if(strcmp(argv[i] , "-d") == 0){
                 cflag = 0;
                 dflag = 1;
-                iflag =1;
+              //  iflag =1;
                 argscount++;
             }
             else if(strcmp(argv[i] , "-i") == 0){
