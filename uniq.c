@@ -167,11 +167,17 @@ loadfrompipe(int cflag,int dflag,int iflag){
 void
 load(int fd,int qt,int cflag,int dflag,int iflag)
 {
-
-
-
-    char *byf = malloc( sizeof(char) * 20);
-    int count=0;
+    char *byf = malloc( sizeof(char) * 20);int p;int count=0;int linescount=0;
+    while((p = read(qt, byf, sizeof(byf))) > 0){
+        int k;
+        for(k=0;k<p;k++){
+            count++;
+            if(byf[k]=='n'){
+                linescount++;
+            }
+        }
+    }
+    free(byf);
     char prevline[720]={0};
     char nextline[720]={0};
     int n , i;
@@ -180,24 +186,17 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int endoflineafterfor;
     int prev=0;
     int next=0;
-    int p;
-    int alreadyusedlines[200]={0};
-    int alreadyusedlinesprinted[100]={0};
+
+    //int alreadyusedlines[200]={0};
+    int *alreadyusedlines = malloc( sizeof(int) * linescount);
+    int *alreadyusedlinesprinted = malloc( sizeof(int) * linescount/3);
+   // int alreadyusedlinesprinted[100]={0};
     int dupnumber = 0;
     int printedlinenumber=0;
     int linecounter=1;
     //Previous file in buffer count
     int prevstart =0;
     int prevend =0;int printedfirsttime=0;
-
-    while((p = read(qt, byf, sizeof(byf))) > 0){
-        int k;
-        for(k=0;k<p;k++){
-            count++;
-        }
-    }
-
-    free(byf);
     char *buf = malloc( sizeof(char) * count);
 
 
