@@ -187,10 +187,10 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int prev=0;
     int next=0;
 
-    int alreadyusedlines[512]={0};
+    int alreadyusedlines[200]={0};
     //int *alreadyusedlines = malloc( sizeof(int) * linescount);
     //int *alreadyusedlinesprinted = malloc( sizeof(int) * 50);
-    int alreadyusedlinesprinted[100]={0};
+    int alreadyusedlinesprinted[50]={0};
     int dupnumber = 0;
     int printedlinenumber=0;
     int linecounter=1;
