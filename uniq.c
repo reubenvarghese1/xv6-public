@@ -177,6 +177,8 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     //The following arrays are to store the ascii values for the d flag
     int alreadyusedlines[1] = {0};
     int alreadyusedlinesprinted[1] = {0};
+    alreadyusedlines[0] = 0;
+    alreadyusedlinesprinted[0] = 0;
     if(dflag ==1){
         int *alreadyusedlines = malloc( sizeof(int) * linescount);
         int *alreadyusedlinesprinted = malloc( sizeof(int) * linescount/3);
