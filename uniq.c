@@ -348,17 +348,17 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         // printf(1,"%s","Unique line above\n");
                     }
                     else{
-                        //checking if end of file reached
-                        linecounter ++;
-                        if(y+2>n){
-                            int ym;
-                            printf(1,"%d ",linecounter);
-                            for (ym = prevend;  ym <n ; ym++) {
-                                printf(1,"%c",buf[ym]);
+                        if (cflag == 1) {
+                            //checking if end of file reached
+                            linecounter++;
+                            if (y + 2 > n) {
+                                int ym;
+                                printf(1, "%d ", linecounter);
+                                for (ym = prevend; ym < n; ym++) {
+                                    printf(1, "%c", buf[ym]);
+                                }
                             }
                         }
-
-
                     }
                 }
 
