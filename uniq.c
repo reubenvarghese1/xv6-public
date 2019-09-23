@@ -2,39 +2,6 @@
 #include "user.h"
 #include "fcntl.h"
 
-#define N 100
-
-struct test {
-    char name;
-    int number;
-};
-
-void
-save(void)
-{
-    int fd;
-    struct test t;
-    t.name = 's';
-    t.number = 1;
-
-    fd = open("backup", O_CREATE | O_RDWR);
-    if(fd >= 0) {
-        printf(1, "ok: create backup file succeed\n");
-    } else {
-        printf(1, "error: create backup file failed\n");
-        exit();
-    }
-
-    int size = sizeof(t);
-    if(write(fd, &t, size) != size){
-        printf(1, "error: write to backup file failed\n");
-        exit();
-    }
-    printf(1, "write ok\n");
-    close(fd);
-}
-
-
 void
 loadfrompipe(int cflag,int dflag,int iflag){
 
@@ -71,9 +38,7 @@ loadfrompipe(int cflag,int dflag,int iflag){
             n++;
         }
         for(y=0;y<n;y++){
-            //printf(1,"%c",buf[y]);
             if(buf[y]=='\n'){
-                //printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
@@ -110,8 +75,6 @@ loadfrompipe(int cflag,int dflag,int iflag){
                     //adding ascii of all lines to the list of used lines
                     alreadyusedlines[printedlinenumber] = calculateascii;
                     printedlinenumber++;
-
-                    // printf(1,"%s","Unique line above\n");
                 }
 
                 else{
@@ -145,9 +108,6 @@ loadfrompipe(int cflag,int dflag,int iflag){
                                 printf(1,"%c",buf[q]);
                             }
                         }
-
-
-                        // printf(1,"%s","Unique line above\n");
                     }
                     else{
                         if (cflag == 1) {
@@ -164,24 +124,6 @@ loadfrompipe(int cflag,int dflag,int iflag){
                     }
                 }
 
-
-//                for (j = 0; j < next; j++) {
-//                    if(prevline[j] == nextline[j]){
-//                        printf(1,"%c",prevline[j]);
-//                        count++;
-//                    }
-//                    else{
-//                        break;
-//                    }
-//                }
-//                if(count == next){
-//                    int k;
-//                    for (k = 0; k < next; k++) {
-//                        //printf(1,"%c",prevline[k]);
-//                    }
-//                }
-
-
                 //Writing location of previous line ka starting and ending in terms of original buf
                 prevstart = startofline;
                 prevend = y+1;
@@ -193,7 +135,6 @@ loadfrompipe(int cflag,int dflag,int iflag){
                 }
                 next = 0;
                 startofline = y+1;
-                // printf(1,"%s%d","yomana",strlen(prevline));
             }
             else{
                 //Put stuff into next line if character isnt new line
@@ -221,8 +162,6 @@ loadfrompipe(int cflag,int dflag,int iflag){
         printf(1, "Uniq: read error\n");
         exit();
     }
-
-    printf(1, "read ok\n");
 }
 
 void
@@ -269,9 +208,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
             n++;
         }
         for(y=0;y<n;y++){
-            //printf(1,"%c",buf[y]);
             if(buf[y]=='\n'){
-                //printf(1,"%c",buf[y-1]);
                 nextline[next]=buf[y];
                 next++;
                 int j;int count = 0;
@@ -308,8 +245,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                         //adding ascii of all lines to the list of used lines
                         alreadyusedlines[printedlinenumber] = calculateascii;
                         printedlinenumber++;
-
-                        // printf(1,"%s","Unique line above\n");
                 }
 
                 else{
@@ -317,7 +252,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                     if(strcmp(prevline,nextline)!=0){
                         if (cflag == 1){
                             int yk;
-                            //printf("%s","Hi buddy");
                             if(printedfirsttime == 1){
                                 printf(1,"%d ",linecounter);
                             }
@@ -343,9 +277,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                                 printf(1,"%c",buf[q]);
                             }
                         }
-
-
-                        // printf(1,"%s","Unique line above\n");
                     }
                     else{
                         if (cflag == 1) {
@@ -362,24 +293,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                     }
                 }
 
-
-//                for (j = 0; j < next; j++) {
-//                    if(prevline[j] == nextline[j]){
-//                        printf(1,"%c",prevline[j]);
-//                        count++;
-//                    }
-//                    else{
-//                        break;
-//                    }
-//                }
-//                if(count == next){
-//                    int k;
-//                    for (k = 0; k < next; k++) {
-//                        //printf(1,"%c",prevline[k]);
-//                    }
-//                }
-
-
                 //Writing location of previous line ka starting and ending in terms of original buf
                 prevstart = startofline;
                 prevend = y+1;
@@ -391,7 +304,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 }
                 next = 0;
                 startofline = y+1;
-               // printf(1,"%s%d","yomana",strlen(prevline));
             }
             else{
                 //Put stuff into next line if character isnt new line
@@ -419,8 +331,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
         printf(1, "Uniq: read error\n");
         exit();
     }
-
-    printf(1, "read ok\n");
 }
 
 int
@@ -437,19 +347,16 @@ main(int argc, char *argv[])
         if (strcmp(argv[i] , "-c") == 0){
             cflag = 1;
             argscount++;
-            printf(1,"%s","C flag set\n");
         }
         else if(strcmp(argv[i] , "-d") == 0){
             cflag = 0;
             dflag = 1;
             iflag =1;
             argscount++;
-            printf(1,"%s","D flag set\n");
         }
         else if(strcmp(argv[i] , "-i") == 0){
             iflag = 1;
             argscount++;
-            printf(1,"%s","I flag set\n");
         }
         else{
             continue;
@@ -457,7 +364,6 @@ main(int argc, char *argv[])
     }
 
     if((argc-argscount) <=1){
-        printf("%s","Calling pipeloader\n");
         loadfrompipe(cflag,dflag,iflag);
         exit();
     }
@@ -466,19 +372,16 @@ main(int argc, char *argv[])
             if (strcmp(argv[i] , "-c") == 0){
                 cflag = 1;
                 argscount++;
-                printf(1,"%s","C flag set\n");
             }
             else if(strcmp(argv[i] , "-d") == 0){
                 cflag = 0;
                 dflag = 1;
                 iflag =1;
                 argscount++;
-                printf(1,"%s","D flag set\n");
             }
             else if(strcmp(argv[i] , "-i") == 0){
                 iflag = 1;
                 argscount++;
-                printf(1,"%s","I flag set\n");
             }
             else{
                 if((fd = open(argv[i], O_RDONLY)) < 0){
