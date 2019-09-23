@@ -319,7 +319,7 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
                 else {
                     nextline[next] = buf[y];
                 }
-                next++;    save();
+                next++;
 
             }
         }
