@@ -329,7 +329,6 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
 
     if(n < 0){
 
-        //printf(1, "Uniq: read error\n");
         exit();
     }
 }
