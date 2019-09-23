@@ -52,7 +52,7 @@ loadfrompipe(int cflag,int dflag,int iflag){
     int p;
 
 
-    char buf[1200];
+    char buf[2400];
 
 
     int alreadyusedlines[100]={0};
