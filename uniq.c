@@ -187,10 +187,11 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int prev=0;
     int next=0;
 
-    //int alreadyusedlines[200]={0};
-    int *alreadyusedlines = malloc( sizeof(int) * linescount);
-    int *alreadyusedlinesprinted = malloc( sizeof(int) * linescount/3);
-    //int alreadyusedlinesprinted[50]={0};
+    //The following arrays are to store the ascii values for the d flag
+    if(dflag ==1){
+        int *alreadyusedlines = malloc( sizeof(int) * linescount);
+        int *alreadyusedlinesprinted = malloc( sizeof(int) * linescount/3);
+    }
     int dupnumber = 0;
     int printedlinenumber=0;
     int linecounter=1;
