@@ -4,9 +4,6 @@
 
 void
 loadfrompipe(int cflag,int dflag,int iflag){
-
-
-
     char prevline[720]={0};
     char nextline[720]={0};
     int n , i;
