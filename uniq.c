@@ -175,10 +175,8 @@ load(int fd,int qt,int cflag,int dflag,int iflag)
     int next=0;
 
     //The following arrays are to store the ascii values for the d flag
-    if(dflag ==1){
-        int alreadyusedlines[512] = {0};
-        int alreadyusedlinesprinted[30] = {0};
-    }
+     int alreadyusedlines[512] = {0};
+     int alreadyusedlinesprinted[30] = {0};
     int dupnumber = 0;
     int printedlinenumber=0;
     int linecounter=1;
