@@ -337,8 +337,6 @@ int
 main(int argc, char *argv[])
 {
     int fd,i,qt;
-    save();
-
     int cflag=0;
     int dflag =0;
     int iflag=0;
