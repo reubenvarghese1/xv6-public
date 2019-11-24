@@ -57,6 +57,16 @@ sys_sbrk(void)
 }
 
 int
+sys_settickets(void) {
+	int ticketstoassign;
+	if(argint(0, &ticketstoassign) >= 0){
+		proc->tickets = new_tickets;
+		return 0;
+	}
+  return -1;
+}
+
+int
 sys_sleep(void)
 {
   int n;

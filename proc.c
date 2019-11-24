@@ -48,6 +48,8 @@ allocproc(void)
   return 0;
 
 found:
+// Added a new property called tickets to each process.
+	p->tickets = 20;
   p->state = EMBRYO;
   p->pid = nextpid++;
   release(&ptable.lock);
@@ -272,6 +274,10 @@ scheduler(void)
   int foundproc = 1;
 
   for(;;){
+  	//Keeping a track of the total number of tickets handed out. This will be used
+  	// later to give a range to our random number generator
+  	int sumoftickets = 0;
+
     // Enable interrupts on this processor.
     sti();
 
@@ -280,9 +286,39 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+    p = ptable.proc;
+
+    //Adding the number of tickets for each process to find an upperlimit for the 
+    //Random number generator
+    while(p < &ptable.proc[NPROC]){
+    	if( p->state == RUNNABLE){
+    		sumoftickets += p->tickets;
+    	}
+    	p++;
+    }
+
+    bool processnotfound = false;
+
+    //Random number chosen as lottery threshold
+    int lotteryval =  random_at_most(sumoftickets);
+    int tracker = 0;
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->state != RUNNABLE)
+      if(p->state != RUNNABLE){
         continue;
+      }
+      else{
+      	if (tracker + p->tickets < tracker)
+      		{
+      			tracker += p->tickets;
+      			processnotfound = true;
+      		}
+      }
+
+      if(processnotfound){
+      	//Resetting the boolean
+      	processnotfound = false;
+      	continue;
+      }
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
